@@ -29,7 +29,14 @@ A bug could eat your latest posting if you don't make a copy of it first.
 
 ## Installation
 
-    go get -u github.com/lpar/hugoutil
+```
+git clone https://github.com/lpar/hugoutil
+cd hugoutil
+export GO111MODULE=on
+go build
+```
+
+For some reason `go get -u` doesn't work because of a problem with `blackfriday` and modules, if anyone knows how to fix that...
 
 ## Example command line use
 
