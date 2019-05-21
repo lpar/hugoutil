@@ -17,7 +17,7 @@ require (
 	github.com/watson-developer-cloud/go-sdk v0.8.0
 	gopkg.in/go-playground/assert.v1 v1.2.1 // indirect
 	gopkg.in/go-playground/validator.v9 v9.28.0 // indirect
-	gopkg.in/russross/blackfriday.v2 v2.0.0-00010101000000-000000000000
+	gopkg.in/russross/blackfriday.v2 v2.0.1
 	gopkg.in/yaml.v2 v2.2.2
 )
 
