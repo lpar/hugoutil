@@ -6,8 +6,8 @@ import (
 	"runtime"
 	"strings"
 
-	"hugoutil/content"
-	"hugoutil/watson"
+	"github.com/lpar/hugoutil/content"
+	"github.com/lpar/hugoutil/watson"
 
 	"github.com/spf13/pflag"
 )

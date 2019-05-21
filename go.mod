@@ -1,4 +1,4 @@
-module hugoutil
+module github.com/lpar/hugoutil
 
 go 1.12
 
