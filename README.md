@@ -6,10 +6,11 @@ Like Hugo, it is written in Go for speed.
 
 ## Features
 
- - Convert Hugo frontmatter between TOML and YAML formats, including batch conversion.
- - Batch add and remove tags from the command line.
+ - Batch add and remove tags and categories from the command line.
  - Automatically extract metadata from article text using [IBM Watson][watson] [Natural Language Understanding][nlu],
  and either apply it to the source files as is, or interactively select from the identified tags and categories.
+ - Convert Hugo frontmatter between TOML and YAML formats, including batch conversion. (Hugo [can also do this][convert], 
+ but I don't find it as convenient.)
 
 IBM Watson functionality requires an IBM Cloud account. You can run this program using an 
 [IBM Cloud Lite][cloud] account, no credit card required.
@@ -17,6 +18,7 @@ IBM Watson functionality requires an IBM Cloud account. You can run this program
 [nlu]: https://www.ibm.com/cloud/watson-natural-language-understanding/resources
 [cloud]: https://www.ibm.com/cloud/free/
 [watson]: https://www.ibm.com/watson
+[convert]: https://gohugo.io/commands/hugo_convert/
 
 ## Disclaimer
 
