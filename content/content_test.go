@@ -21,7 +21,7 @@ Dull body text
 	if err != nil {
 		t.Errorf("test parse failed: %v", err)
 	}
-	if bytes.Compare(art.Body, []byte("\nDull body text\n")) != 0 {
+	if !bytes.Equal(art.Body, []byte("\nDull body text\n")) {
 		t.Errorf("body not preserved")
 	}
 	if !compareSlices(art.Tags.Slice(), []string{"one", "two"}) {
@@ -39,7 +39,10 @@ Dull body text
 	}
 	defer os.Remove(tmpfile.Name())
 	tmpfile.Close()
-	art.Write(tmpfile.Name(), TOML)
+	err = art.Write(tmpfile.Name(), TOML)
+	if err != nil {
+		t.Errorf("can't write article: %v", err)
+	}
 	txt, err := ioutil.ReadFile(tmpfile.Name())
 	if err != nil {
 		t.Errorf("can't read temporary file %s: %v", tmpfile.Name(), err)

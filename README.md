@@ -32,11 +32,8 @@ A bug could eat your latest posting if you don't make a copy of it first.
 ```
 git clone https://github.com/lpar/hugoutil
 cd hugoutil
-export GO111MODULE=on
 go build
 ```
-
-For some reason `go get -u` doesn't work because of a problem with `blackfriday` and modules, if anyone knows how to fix that...
 
 ## Example command line use
 
@@ -89,5 +86,5 @@ Select categories by number and any number of keywords by letter
 
 ## Copyright
 
-Copyright © IBM Corporation 2019. Apache License 2.0.
+Copyright © IBM Corporation 2019-2020. Apache License 2.0.
  

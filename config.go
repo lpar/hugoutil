@@ -4,13 +4,13 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
-	"os/user"
 	"path/filepath"
 	"runtime"
 
 	"github.com/BurntSushi/toml"
 )
 
+// Config represents the configuration information used for access to an IBM Watson Cloud account.
 type Config struct {
 	APIKey string `toml:"api_key"`
 	APIURL string `toml:"api_url"`
@@ -40,18 +40,25 @@ func writeSampleConfig(filename string) {
 
 func loadConfig() (Config, error) {
 	conf := Config{}
-	user, err := user.Current()
+	homedir, err := os.UserHomeDir()
 	if err != nil {
-		return conf, fmt.Errorf("can't get user identity: %v", err)
+		return conf, fmt.Errorf("can't get user home directory: %w", err)
 	}
-	// Default config location is XDG-CONFIG for Linux, BSD, ...
-	prefsfile := filepath.Join(user.HomeDir, ".config", "hugoutil", "prefs.toml")
+	confdir, err := os.UserConfigDir()
+	if err != nil {
+		return conf, fmt.Errorf("can't get user config directory: %w", err)
+	}
+	var prefsfile string
 	switch runtime.GOOS {
 	case "windows":
-		// I think this is right for Windows, but I don't really use Windows
-		prefsfile = filepath.Join(user.HomeDir, "AppData", "Local", "hugoutil", "prefs.toml")
+		// On Windows, %APPDATA%/Local is preferences local to the current machine.
+		prefsfile = filepath.Join(confdir, "Local", "hugoutil", "prefs.toml")
 	case "darwin":
-		prefsfile = filepath.Join(user.HomeDir, "Library", "Preferences", "com.ath0.hugoutil", "prefs.toml")
+		// On macOS, use Preferences rather than Application Support, i.e. don't use os.UserConfigDir.
+		prefsfile = filepath.Join(homedir, "Library", "Preferences", "com.ath0.hugoutil", "prefs.toml")
+	default:
+		// Everything else is XDG spec so use a directory under os.UserConfigDir.
+		prefsfile = filepath.Join(confdir, "hugoutil", "prefs.toml")
 	}
 	if *verbose {
 		fmt.Printf("Checking for preferences in %s\n", prefsfile)
